@@ -18,6 +18,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
+import android.view.KeyEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceHolder.Callback;
 import android.view.SurfaceView;
@@ -56,6 +57,20 @@ public class CaptureActivity extends Activity implements Callback
 	}
 
 	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event)
+	{
+		if(keyCode == KeyEvent.KEYCODE_BACK){
+	        Intent intent = new Intent();   
+	        /* 指定intent要启动的类 */
+	        intent.setClass(CaptureActivity.this, MainActivity.class);
+	        /* 启动一个新的Activity */
+	        CaptureActivity.this.startActivity(intent);
+	        /* 关闭当前的Activity */
+	        CaptureActivity.this.finish();	
+			}
+		return true;
+	}
+	
 	protected void onResume()
 	{
 		super.onResume();
@@ -177,9 +192,9 @@ public class CaptureActivity extends Activity implements Callback
 			Drawable drawable = new BitmapDrawable(barcode);
 			dialog.setIcon(drawable);
 		}
-		dialog.setTitle("Connect to This URL?");
+		dialog.setTitle("Connect To This URL?");
 		dialog.setMessage(obj.getText());
-		dialog.setNegativeButton("YES", new DialogInterface.OnClickListener()
+		dialog.setPositiveButton("YES", new DialogInterface.OnClickListener()
 		{
 			@Override
 			public void onClick(DialogInterface dialog, int which)
@@ -189,15 +204,16 @@ public class CaptureActivity extends Activity implements Callback
 				Uri content_url = Uri.parse(obj.getText());
 				intent.setData(content_url);
 				startActivity(intent);
-				finish();
+				//finish();
 			}
 		});
-		dialog.setPositiveButton("NO", new DialogInterface.OnClickListener()
+		dialog.setNegativeButton("NO", new DialogInterface.OnClickListener()
 		{
 			@Override
 			public void onClick(DialogInterface dialog, int which)
 			{
-				finish();
+				//finish();
+				dialog.cancel();
 			}
 		});
 		dialog.create().show();

@@ -14,7 +14,7 @@ import com.google.zxing.qrcode.QRCodeWriter;
 public class CreateQRImage
 {
 	public Bitmap bitmap;
-	private int QR_WIDTH = 200, QR_HEIGHT = 200;
+	private int QR_WIDTH = 250, QR_HEIGHT = 250;
 
 	public void createQRImage(String url)
 	{

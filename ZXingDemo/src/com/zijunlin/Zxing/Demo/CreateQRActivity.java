@@ -3,6 +3,7 @@ package com.zijunlin.Zxing.Demo;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -30,6 +31,12 @@ public class CreateQRActivity extends Activity
 		urltext_test.setText(urltext.getText());
 	}
 
+	public void resetURL(View view)
+	{
+		TextView urltext = (TextView) findViewById(R.id.urlText);
+		urltext.setText("");
+	}
+	
 	public void backtohome(View view)
 	{
         Intent intent = new Intent();   
@@ -39,5 +46,19 @@ public class CreateQRActivity extends Activity
         CreateQRActivity.this.startActivity(intent);
         /* 关闭当前的Activity */
         CreateQRActivity.this.finish();	
+	}
+	
+	public boolean onKeyDown(int keyCode, KeyEvent event)
+	{
+		if(keyCode == KeyEvent.KEYCODE_BACK){
+	        Intent intent = new Intent();   
+	        /* 指定intent要启动的类 */
+	        intent.setClass(CreateQRActivity.this, MainActivity.class);
+	        /* 启动一个新的Activity */
+	        CreateQRActivity.this.startActivity(intent);
+	        /* 关闭当前的Activity */
+	        CreateQRActivity.this.finish();	
+			}
+		return true;
 	}
 }
