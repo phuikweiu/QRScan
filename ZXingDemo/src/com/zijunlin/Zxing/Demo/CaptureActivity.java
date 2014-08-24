@@ -214,8 +214,10 @@ public class CaptureActivity extends Activity implements Callback
 			{
 				//finish();
 				dialog.cancel();
+				handler.restartPreviewAndDecode();
 			}
 		});
+		dialog.setCancelable(false);
 		dialog.create().show();
 	}
 
